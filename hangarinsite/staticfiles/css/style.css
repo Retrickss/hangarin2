@@ -1,0 +1,63 @@
+/* Custom Styles for PSUSphere Dashboard */
+
+/* Smooth transitions */
+.sidenav, .card, .btn {
+    transition: all 0.3s ease;
+}
+
+/* Card hover effects */
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Custom badge styles */
+.badge {
+    font-size: 0.65em;
+    font-weight: 600;
+}
+
+/* List group item hover */
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    border-left: 4px solid #5e72e4;
+}
+
+/* Icon shapes */
+.icon-shape {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom navbar brand */
+.navbar-brand {
+    padding: 0.5rem 0;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
