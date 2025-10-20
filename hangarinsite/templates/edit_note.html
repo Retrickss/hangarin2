@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Note | Hangarin{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="card border-0 shadow-lg rounded-4 p-4" style="background-color:#f9fafc;">
+    <h3 class="fw-bold mb-4 text-success">
+      {% if object %}<i class="bi bi-pencil-square me-2"></i>Edit Note{% else %}<i class="bi bi-plus-circle me-2"></i>Add Note{% endif %}
+    </h3>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="d-flex justify-content-end mt-3">
+        <a href="{% url 'notes' %}" class="btn btn-outline-secondary rounded-pill px-4 me-2">Cancel</a>
+        <button type="submit" class="btn btn-success rounded-pill px-4">
+          <i class="bi bi-check-circle me-1"></i> Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<style>
+  form p label { font-weight: 600; color: #4a4a4a; }
+  form p textarea, form p select, form p input {
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+  }
+  form p textarea:focus, form p select:focus, form p input:focus {
+    border-color: #1cc88a;
+    box-shadow: 0 0 4px rgba(28,200,138,0.4);
+  }
+</style>
+{% endblock %}

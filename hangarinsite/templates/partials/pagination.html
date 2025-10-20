@@ -1,0 +1,34 @@
+{% if page_obj.has_other_pages %}
+<div class="d-flex flex-column align-items-center mt-4">
+  <nav aria-label="Page navigation">
+    <ul class="pagination pagination-rounded justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}">First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Prev</a></li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">First</span></li>
+        <li class="page-item disabled"><span class="page-link">Prev</span></li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+          <li class="page-item"><a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Last</a></li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">Next</span></li>
+        <li class="page-item disabled"><span class="page-link">Last</span></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <small class="text-muted mt-2">
+    Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} out of {{ page_obj.paginator.count }} entries
+  </small>
+</div>
+{% endif %}
