@@ -1,128 +1,143 @@
 {% load i18n %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Confirm Google Login</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Poppins', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: -1;
-        }
-        .auth-card {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem;
-            animation: fadeInUp 0.8s ease;
-            margin: auto;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            padding: 16px;
-            font-size: 16px;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(135deg, #764ba2, #667eea);
-        }
-        .btn-outline-secondary {
-            border: 2px solid #6c757d;
-            border-radius: 12px;
-            font-weight: 600;
-            padding: 16px;
-            font-size: 16px;
-            color: #6c757d;
-            background: transparent;
-            transition: all 0.3s ease;
-        }
-        .btn-outline-secondary:hover {
-            background: #6c757d;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
-        }
-        h3 {
-            color: #495057;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-        p {
-            color: #6c757d;
-            margin-bottom: 2rem;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        strong {
-            color: #667eea;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .google-icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: #db4437;
-        }
-        .btn-primary i {
-            margin-right: 8px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Confirm {{ provider.name }} Login</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: -1;
+    }
+
+    .auth-card {
+      max-width: 450px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      animation: fadeInUp 0.8s ease;
+      margin: auto;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 16px;
+      font-size: 16px;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #764ba2, #667eea);
+    }
+
+    .btn-outline-secondary {
+      border: 2px solid #6c757d;
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 16px;
+      font-size: 16px;
+      color: #6c757d;
+      background: transparent;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-outline-secondary:hover {
+      background: #6c757d;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    }
+
+    h3 {
+      color: #495057;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: #6c757d;
+      margin-bottom: 2rem;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    strong {
+      color: #667eea;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .provider-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .google-icon {
+      color: #db4437;
+    }
+
+    .github-icon {
+      color: #333;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="auth-card">
-        <h3>Confirm Sign In</h3>
-        <p>You are about to sign in using your <strong>{{ provider.name }}</strong> account.</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary btn-block mb-3">
-                <i class="fab fa-google google-icon"></i>
-                Continue with {{ provider.name }}
-            </button>
-        </form>
-        <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-block">Cancel</a>
-    </div>
+  <div class="auth-card">
+    <h3>Confirm Sign In</h3>
+    <p>You are about to sign in using your <strong>{{ provider.name }}</strong> account.</p>
+    <form method="post"> {% csrf_token %} <button type="submit" class="btn btn-primary btn-block mb-3"> {% if provider.id == 'google' %} <i class="fab fa-google provider-icon google-icon"></i> {% elif provider.id == 'github' %} <i class="fab fa-github provider-icon github-icon"></i> {% endif %} Continue with {{ provider.name }} </button> </form> <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-block">Cancel</a>
+  </div>
 </body>
+
 </html>
