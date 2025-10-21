@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 # Import all views from taskmanager
 from taskmanager.views import (
@@ -34,6 +34,7 @@ from taskmanager.views import (
 urlpatterns = [
     # 🧭 Admin Panel
     path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),  # for django-allauth
 
     # 🏠 Dashboard
     path("", HomePageView.as_view(), name="home"),
